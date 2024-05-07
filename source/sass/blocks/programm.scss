@@ -1,0 +1,99 @@
+.programm {
+  @include adaptiveDesktopToMobile('padding-bottom', 150, 75);
+  @include adaptiveDesktopToMobile('padding-top', 150, 75);
+}
+.programm__title {
+  @include adaptiveDesktopToMobile('font-size', 62, 38);
+  font-weight: 500;
+  line-height: 125%;
+  margin: 0;
+  @include adaptiveDesktopToMobile('margin-bottom', 70, 35);
+}
+.programm__cards {
+}
+.programm__card {
+  @include adaptiveDesktopToMobile('--width', 207, 100);
+  display: grid;
+  grid-template-columns: auto var(--width);
+  background: #EEF5FB;
+  @include adaptiveDesktopToMobile('padding', 40, 20);
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &:last-child {
+    background: #07F;
+    color: #FFF;
+
+    .programm__card-time {
+      color: #07F;
+      background: #FFF;
+    }
+  }
+}
+.programm__card-text {
+  &:last-child {
+    grid-column: span 2;
+  }
+}
+.programm__card-time {
+  border-radius: 100px;
+  background: #07F;
+  width: fit-content;
+  @include adaptiveDesktopToMobile('padding-top', 13, 7);
+  @include adaptiveDesktopToMobile('padding-bottom', 13, 7);
+  @include adaptiveDesktopToMobile('padding-right', 20, 13);
+  @include adaptiveDesktopToMobile('padding-left', 20, 13);
+  @include adaptiveDesktopToMobile('font-size', 22, 13);
+  color: #EEF5FB;
+}
+.programm__card-title {
+  @include adaptiveDesktopToMobile('font-size', 42, 26);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  margin: 0;
+  @include adaptiveDesktopToMobile('margin-top', 20, 10);
+
+  &:not(:last-child) {
+    @include adaptiveDesktopToMobile('margin-bottom', 40, 20);
+  }
+}
+.programm__card-who {
+}
+.programm__card-who-name {
+  @include adaptiveDesktopToMobile('font-size', 28, 20);
+  font-weight: 500;
+}
+.programm__card-who-position {
+  @include adaptiveDesktopToMobile('font-size', 22, 14);
+}
+.programm__card-photo {
+  @include adaptiveDesktopToMobile('width', 207, 100);
+}
+.programm__card-more {
+  @include adaptiveDesktopToMobile('margin-top', 40, 20);
+  grid-column: span 2;
+  @include adaptiveDesktopToMobile('font-size', 22, 14);
+}
+.programm__card-more-element {
+}
+.programm__card-more-content {
+}
+.programm__card-more-button {
+  border: none;
+  background: unset;
+  cursor: pointer;
+  transition: $trans-default;
+  padding: 0;
+
+  svg {
+    @include adaptiveDesktopToMobile('width', 58, 45);
+  }
+
+  .is-active & {
+    transform: rotate(90deg);
+    @include adaptiveDesktopToMobile('margin-top', 40, 20);
+  }
+}

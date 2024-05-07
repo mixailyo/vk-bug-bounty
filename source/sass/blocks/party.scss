@@ -1,0 +1,104 @@
+.party {
+  background: #07F;
+  @include adaptiveDesktopToMobile('padding-bottom', 150, 75);
+  @include adaptiveDesktopToMobile('padding-top', 150, 75);
+  color: #FFF;
+  position: relative;
+}
+.party__illustration {
+  position: absolute;
+  bottom: -50px;
+  right: 0;
+  @include adaptiveDesktopToMobile('width', 480, 20);
+
+  @include vp-1023 {
+    display: none;
+  }
+}
+.party__title {
+  @include adaptiveDesktopToMobile('font-size', 62, 38);
+  font-weight: 500;
+  line-height: 125%;
+  margin: 0;
+  @include adaptiveDesktopToMobile('margin-bottom', 70, 35);
+}
+.party__description {
+  margin: 0;
+  @include adaptiveDesktopToMobile('margin-bottom', 70, 35);
+}
+.party__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+
+  @include vp-1023 {
+    grid-template-columns: auto;
+  }
+}
+.party__card {
+  background: #005FF9;
+  display: flex;
+  flex-direction: column;
+  @include adaptiveDesktopToMobile('padding', 40, 20);
+  @include adaptiveDesktopToMobile('padding-top', 40, 20);
+  @include adaptiveDesktopToMobile('padding-bottom', 52, 20);
+}
+.party__card-title {
+  margin: 0 0 32px;
+  @include adaptiveDesktopToMobile('font-size', 36, 23);
+  font-weight: 500;
+
+  @include vp-767 {
+    margin: 0 0 20px;
+  }
+}
+.party__card-content {
+  @include adaptiveDesktopToMobile('font-size', 26, 16);
+  max-width: 90%;
+
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+
+    li {
+      &:not(:last-child) {
+        @include adaptiveDesktopToMobile('margin-bottom', 12, 6);
+      }
+      &::marker {
+        @include adaptiveDesktopToMobile('font-size', 22, 14);
+      }
+    }
+  }
+}
+.party__card-link {
+  background: #FFF;
+  display: flex;
+  width: fit-content;
+  padding: 18px 24px;
+  @include adaptiveDesktopToMobile('padding-left', 24, 19);
+  @include adaptiveDesktopToMobile('padding-right', 24, 19);
+  @include adaptiveDesktopToMobile('padding-top', 18, 10);
+  @include adaptiveDesktopToMobile('padding-bottom', 18, 10);
+  justify-content: center;
+  align-items: center;
+  color: #07F;
+  @include adaptiveDesktopToMobile('font-size', 22, 15);
+  font-weight: 500;
+  margin-top: auto;
+  transition: $trans-default;
+  border: unset;
+  cursor: pointer;
+
+  @include hover-focus {
+    opacity: 0.8;
+  }
+
+  @include vp-767 {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+}

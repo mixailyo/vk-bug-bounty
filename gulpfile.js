@@ -6,6 +6,7 @@ import { copy, copyImages, copySvg } from './gulp/copyAssets.mjs';
 import js from './gulp/compileScripts.mjs';
 import { svgo, sprite, createWebp, optimizeImages } from './gulp/optimizeImages.mjs';
 import html from './gulp/compileHtml.mjs';
+import htmlNew from './gulp/compileHtmlNew.mjs';
 
 const server = browserSync.create();
 const streamStyles = () => styles().pipe(server.stream());
@@ -26,12 +27,14 @@ const syncServer = () => {
     ui: false,
   });
 
-  gulp.watch('source/pug/**/*.pug', gulp.series(html, refresh));
+  gulp.watch('source/bbparty/**/*.html', gulp.series(html, htmlNew, refresh));
+  gulp.watch('source/html/**/*.html', gulp.series(html, htmlNew, refresh));
+  gulp.watch('source/pug/**/*.pug', gulp.series(html, htmlNew, refresh));
   gulp.watch('source/sass/**/*.{scss,sass}', streamStyles);
   gulp.watch('source/js/**/*.{js,json}', gulp.series(js, refresh));
   gulp.watch('source/data/**/*.{js,json}', gulp.series(copy, refresh));
-  gulp.watch('source/img/**/*.svg', gulp.series(copySvg, sprite, html, refresh));
-  gulp.watch('source/img/**/*.{png,jpg,webp}', gulp.series(copyImages, html, refresh));
+  gulp.watch('source/img/**/*.svg', gulp.series(copySvg, sprite, html, htmlNew, refresh));
+  gulp.watch('source/img/**/*.{png,jpg,webp}', gulp.series(copyImages, html, htmlNew, refresh));
 
   gulp.watch('source/favicon/**', gulp.series(copy, refresh));
   gulp.watch('source/video/**', gulp.series(copy, refresh));
@@ -40,7 +43,7 @@ const syncServer = () => {
 };
 
 
-const build = gulp.series(clean, svgo, copy, styles, sprite, js, html);
+const build = gulp.series(clean, svgo, copy, styles, sprite, js, html, htmlNew);
 const start = gulp.series(build, syncServer);
 
 export { optimizeImages as imagemin, createWebp as webp, build, start };

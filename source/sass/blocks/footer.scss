@@ -1,5 +1,29 @@
 .footer {
-  padding: 40px 0;
+  @include adaptiveDesktopToMobile('padding-bottom', 100, 50);
+  @include adaptiveDesktopToMobile('padding-top', 100, 50);
+  color: #FFF;
+  background-color: #0077FF;
 
-  background-color: $color-neon-blue;
+  &--dark {
+    background: #005FF9;
+  }
+}
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include adaptiveDesktopToMobile('margin-bottom', 60, 30);
+}
+.footer__title {
+  @include adaptiveDesktopToMobile('font-size', 42, 24);
+  font-weight: 500;
+  line-height: 125%;
+  margin: 0;
+}
+.footer__logo {
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+.footer__copyright {
+  @include adaptiveDesktopToMobile('font-size', 18, 14);
 }

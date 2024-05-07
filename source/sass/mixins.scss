@@ -1,3 +1,42 @@
+$maxWidth: 1680;
+$startWidth: 1680;
+$midWidth: 768;
+$endWidth: 375;
+
+@mixin adaptiveFull($property, $startSize, $midSize, $endSize) {
+  $addSizeMid: $startSize - $midSize;
+  $addSizeEnd: $midSize - $endSize;
+  #{$property}: $startSize + px;
+  @media (max-width: #{$startWidth + px}) {
+    #{$property}: calc(#{$midSize + px} + #{$addSizeMid} * ((100vw - #{$midWidth + px}) / #{$startWidth - $midWidth}));
+  }
+  @media (max-width: #{$midWidth + px}) {
+    #{$property}: calc(#{$endSize + px} + #{$addSizeEnd} * ((100vw - #{$endWidth + px}) / #{$midWidth - $endWidth}));
+  }
+}
+
+@mixin adaptiveDesktopToMobile($property, $startSize, $endSize) {
+  $addSize: $startSize - $endSize;
+  #{$property}: $startSize + px;
+  @media (max-width: #{$startWidth + px}) {
+    #{$property}: calc(#{$endSize + px} + #{$addSize} * ((100vw - #{$endWidth + px}) / #{$startWidth - $endWidth}));
+  }
+}
+
+@mixin adaptiveLargeDesktopToMobile($property, $startSize, $endSize) {
+  $addSize: $startSize - $endSize;
+  #{$property}: calc(#{$endSize + px} + #{$addSize} * ((#{$maxWidth + px} - #{$endWidth + px}) / #{$startWidth - $endWidth}));
+  @media screen and (max-width: #{$maxWidth + px}) {
+    #{$property}: calc(#{$endSize + px} + #{$addSize} * ((100vw - #{$endWidth + px}) / #{$startWidth - $endWidth}));
+  }
+}
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 @mixin retina {
   @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
     @content;
@@ -46,6 +85,12 @@
 
 @mixin vp-1439 {
   @media (max-width: ($vp-1440 - 1px)) {
+    @content;
+  }
+}
+
+@mixin vp-1365 {
+  @media (max-width: ($vp-1366 - 1px)) {
     @content;
   }
 }

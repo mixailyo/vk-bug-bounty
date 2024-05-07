@@ -1,0 +1,39 @@
+.contacts {
+  background: linear-gradient(0deg, #EEF5FB 0%, #EEF5FB 100%), url(<path-to-image>) lightgray 50% / cover no-repeat;
+  @include adaptiveDesktopToMobile('padding-bottom', 150, 75);
+  @include adaptiveDesktopToMobile('padding-top', 150, 75);
+}
+.contacts__title {
+  @include adaptiveDesktopToMobile('font-size', 62, 38);
+  font-weight: 500;
+  line-height: 125%;
+  margin: 0;
+  @include adaptiveDesktopToMobile('margin-bottom', 70, 35);
+}
+.contacts__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+
+  @include vp-1023 {
+    grid-template-columns: auto;
+  }
+}
+.contacts__card {
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  @include adaptiveDesktopToMobile('padding', 40, 20);
+}
+.contacts__card-icon {
+  @include adaptiveDesktopToMobile('height', 54, 30);
+  @include adaptiveDesktopToMobile('width', 54, 30);
+}
+.contacts__card-title {
+  @include adaptiveDesktopToMobile('font-size', 36, 24);
+  @include adaptiveDesktopToMobile('margin-top', 30, 15);
+  @include adaptiveDesktopToMobile('margin-bottom', 20, 10);
+}
+.contacts__card-more {
+  margin: 0;
+}

@@ -1,5 +1,11 @@
 import {iosVhFix} from './utils/ios-vh-fix';
 import {initModals} from './modules/modals/init-modals';
+import {headerInit} from './modules/header';
+import {initAccordions} from './modules/accordion/init-accordion';
+import {programmsInit} from './modules/programms';
+import {lineInit} from './modules/line';
+import {sendFormInit} from './modules/send-form';
+import {howInit} from './modules/how';
 
 // ---------------------------------
 
@@ -9,6 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
   // ---------------------------------
 
   iosVhFix();
+  headerInit();
+  lineInit();
 
   // Modules
   // ---------------------------------
@@ -17,6 +25,10 @@ window.addEventListener('DOMContentLoaded', () => {
   // в load следует добавить скрипты, не участвующие в работе первого экрана
   window.addEventListener('load', () => {
     initModals();
+    initAccordions();
+    programmsInit();
+    sendFormInit();
+    howInit();
   });
 });
 

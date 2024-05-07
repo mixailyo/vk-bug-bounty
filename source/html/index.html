@@ -3,7 +3,7 @@
 <head>
 
   @@include("source/html/base/head.html")
-  <title>ProjectName — Главная</title>
+  <title>VK Bug Bounty</title>
 
 </head>
 <body>
@@ -13,30 +13,27 @@
   </div>
 
   <div class="wrapper">
-    <-- для внутренних страниц используйте "headerActiveLinkIndex": 0\1\2 --> 
-    @@include("source/html/base/header.html", {
-      "index": true
-    })
+    @@include("source/html/base/header.html")
 
     <main>
-      <div class="container">
-        <p><a href="#" data-open-modal="feedback">modal--feedback link</a></p>
-        <p><a href="#" data-open-modal="success">modal--success link</a></p>
-      </div>
+      @@include("source/html/components/welcome.html")
+
+      @@include("source/html/components/line.html")
+
+      @@include("source/html/components/indicators.html")
+
+      @@include("source/html/components/event.html")
+      
+      @@include("source/html/components/programms.html")
+      
+      @@include("source/html/components/platforms.html")
+
+      @@include("source/html/components/line-without-border-bottom.html")
+
+      @@include("source/html/components/party.html")
     </main>
 
-    @@include("source/html/base/footer.html")
-
-    @@include("source/html/base/modal.html", {
-      "name": "feedback"
-    })
-
-    @@include("source/html/base/modal.html", {
-      "name": "success",
-      "fitContent": true,
-      "noScale": true,
-      "mod": "some-mod"
-    })
+    @@include("source/html/base/footer-main.html")
   </div>
 
   <script src="js/vendor.min.js"></script>

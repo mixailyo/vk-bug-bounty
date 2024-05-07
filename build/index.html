@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="VK Bug Bounty">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:image" content="img/content/preview.png" />
+  <meta property="og:title" content="VK Bug Bounty" />
+  <meta property="og:description" content="VK Bug Bounty" />
+  <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+  <link rel="stylesheet" href="css/style.min.css">
+  <!-- Google Tag Manager -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-132212466-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-132212466-1');
+  </script>
+  <!-- End Google Tag Manager -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LeuqKsUAAAAAEor6g5LTz03KEXd9D8n0_bwX_zL"></script>
+  <title>VK Bug Bounty</title>
+</head>
+
+<body>
+  <div style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <symbol id="icon-close" viewBox="0 0 20 20">
+        <path d="M.293 18.291a1 1 0 101.414 1.414L10 11.413l8.292 8.292a1 1 0 101.414-1.414l-8.292-8.292 8.292-8.292A1 1 0 1018.291.293L9.999 8.585 1.707.293A1 1 0 10.293 1.707L8.585 10 .293 18.291z" />
+      </symbol>
+    </svg>
+  </div>
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <a href="/">
+          <img src="img/content/logo.svg" alt="" class="header__logo" width="42" height="42">
+        </a>
+        <nav class="header__menu">
+          <ul class="header__menu-list">
+            <li class="header__menu-list-item">
+              <a href="/bountypass1" class="header__menu-link">Bounty pass #1: Progress</a>
+            </li>
+            <!-- <li class="header__menu-list-item">
+          <a class="header__menu-link">Bounty pass #2</a>
+        </li>
+        <li class="header__menu-list-item">
+          <a class="header__menu-link">Bounty pass #3</a>
+        </li> -->
+            <li class="header__menu-list-item">
+              <a href="/bbparty" class="header__menu-link">VK BB 10 years unlocked</a>
+            </li>
+          </ul>
+        </nav>
+        <button class="header__hamburger hamburger hamburger--squeeze" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="welcome">
+        <div class="container">
+          <div class="welcome__wrapper">
+            <div class="welcome__text">
+              <div class="welcome__date">
+                <svg class="welcome__date-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                  <path d="M15.0895 14.7353C15.0895 15.585 14.4007 16.2738 13.5511 16.2738C12.7014 16.2738 12.0126 15.585 12.0126 14.7353C12.0126 13.8856 12.7014 13.1968 13.5511 13.1968C14.4007 13.1968 15.0895 13.8856 15.0895 14.7353Z" fill="#0077FF" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.85869 0.376221C6.3685 0.376221 6.78178 0.7895 6.78178 1.29931V1.91514C6.96612 1.91469 7.15802 1.91469 7.3578 1.91469H12.5648C12.7646 1.91469 12.9565 1.91469 13.1408 1.91514V1.29931C13.1408 0.7895 13.5541 0.376221 14.0639 0.376221C14.5737 0.376221 14.987 0.7895 14.987 1.29931V1.96905C15.6309 2.02358 16.2001 2.13756 16.7281 2.40657C17.5772 2.83923 18.2676 3.52961 18.7003 4.37876C18.9733 4.91452 19.0866 5.49281 19.1402 6.14849C19.1922 6.78482 19.1922 7.57022 19.1922 8.54202V13.7491C19.1922 14.7209 19.1922 15.5063 19.1402 16.1426C19.0866 16.7983 18.9733 17.3766 18.7003 17.9123C18.2676 18.7615 17.5772 19.4518 16.7281 19.8845C16.1923 20.1575 15.614 20.2708 14.9584 20.3244C14.322 20.3764 13.5366 20.3764 12.5648 20.3764H7.35779C6.38599 20.3764 5.6006 20.3764 4.96427 20.3244C4.30858 20.2708 3.7303 20.1575 3.19453 19.8845C2.34538 19.4518 1.655 18.7615 1.22234 17.9123C0.949356 17.3766 0.836015 16.7983 0.782443 16.1426C0.730453 15.5063 0.73046 14.7209 0.730469 13.7491V8.54202C0.73046 7.57022 0.730453 6.78482 0.782443 6.14849C0.836015 5.4928 0.949356 4.91452 1.22234 4.37876C1.655 3.52961 2.34538 2.83923 3.19453 2.40657C3.72248 2.13756 4.29171 2.02358 4.93561 1.96905V1.29931C4.93561 0.7895 5.34889 0.376221 5.85869 0.376221ZM4.93561 3.8236C4.5027 3.87049 4.23792 3.94694 4.03268 4.05151C3.53091 4.30718 3.12295 4.71513 2.86729 5.2169C2.74901 5.44903 2.66672 5.75731 2.62248 6.29883C2.58533 6.75351 2.57828 7.31495 2.57695 8.06859H17.3457C17.3443 7.31495 17.3373 6.75351 17.3001 6.29883C17.2559 5.75731 17.1736 5.44903 17.0553 5.2169C16.7997 4.71513 16.3917 4.30718 15.8899 4.05151C15.6847 3.94693 15.4199 3.87049 14.987 3.8236V4.58138C14.987 5.09119 14.5737 5.50447 14.0639 5.50447C13.5541 5.50447 13.1408 5.09119 13.1408 4.58138V3.76139C12.949 3.7609 12.7444 3.76086 12.5254 3.76086H7.39719C7.17826 3.76086 6.97362 3.7609 6.78178 3.76139V4.58138C6.78178 5.09119 6.3685 5.50447 5.85869 5.50447C5.34889 5.50447 4.93561 5.09119 4.93561 4.58138V3.8236ZM17.346 9.91476H2.57664V13.7097C2.57664 14.7301 2.57736 15.44 2.62248 15.9922C2.66672 16.5338 2.74901 16.842 2.86729 17.0742C3.12295 17.5759 3.53091 17.9839 4.03268 18.2396C4.26481 18.3578 4.57309 18.4401 5.1146 18.4844C5.6669 18.5295 6.37673 18.5302 7.39719 18.5302H12.5254C13.5459 18.5302 14.2557 18.5295 14.808 18.4844C15.3495 18.4401 15.6578 18.3578 15.8899 18.2396C16.3917 17.9839 16.7997 17.5759 17.0553 17.0742C17.1736 16.842 17.2559 16.5338 17.3001 15.9922C17.3453 15.44 17.346 14.7301 17.346 13.7097V9.91476Z" fill="#0077FF" />
+                </svg>
+                <div class="welcome__date-value">Старт 15.04.24</div>
+              </div>
+              <h1 class="welcome__title"><span>VK&nbsp;Bug&nbsp;Bounty</span> полный upgrade</h1>
+              <p class="welcome__description">В&nbsp;2024 году VK&nbsp;Bug Bounty 10&nbsp;лет. Будем праздновать громко, эпично, весь год!</p>
+            </div>
+            <video src="video/1.mp4" alt="" class="welcome__illustration" width="572" height="604" muted="muted" playsinline autoplay loop></video>
+            <!-- <img src="img/content/welcome.png" alt="" class="welcome__illustration" width="572" height="604"> -->
+          </div>
+        </div>
+      </section>
+      <div class="line">
+        <div class="line__wrapper">
+          <div class="line__content marquee-container">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+        </div>
+      </div>
+      <section class="indicators">
+        <div class="container">
+          <div class="indicators__cards">
+            <div class="indicators__card">
+              <div class="indicators__card-value">>30</div>
+              <div class="indicators__card-description">программ для поиска багов</div>
+            </div>
+            <div class="indicators__card">
+              <div class="indicators__card-value">>18 000</div>
+              <div class="indicators__card-description">отчётов получено и&nbsp;проверено</div>
+            </div>
+            <div class="indicators__card">
+              <div class="indicators__card-value">>236 <span>млн руб</span></div>
+              <div class="indicators__card-description">получили багхантеры за&nbsp;время существования программы</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="event">
+        <img src="img/content/event-bg.png" alt="" class="event__bg" width="1680" height="1179">
+        <div class="container">
+          <h2 class="event__title">Это что-то новое! Game&nbsp;on!</h2>
+          <p class="event__description">
+            Открывайте новые уровни, получайте уникальные задания, ищите награды и&nbsp;зарабатывайте больше. Еще больше.
+          </p>
+          <div class="event__cards">
+            <div class="event__card">
+              <div class="event__card-date">
+                <svg class="event__card-date-icon" xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                  <path d="M14.6813 15.1118C14.6813 15.9614 13.9925 16.6502 13.1429 16.6502C12.2932 16.6502 11.6044 15.9614 11.6044 15.1118C11.6044 14.2621 12.2932 13.5733 13.1429 13.5733C13.9925 13.5733 14.6813 14.2621 14.6813 15.1118Z" fill="white" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45049 0.752686C5.96029 0.752686 6.37357 1.16596 6.37357 1.67577V2.29161C6.55792 2.29116 6.74982 2.29116 6.9496 2.29116H12.1566C12.3564 2.29116 12.5483 2.29116 12.7326 2.29161V1.67577C12.7326 1.16596 13.1459 0.752686 13.6557 0.752686C14.1655 0.752686 14.5788 1.16596 14.5788 1.67577V2.34551C15.2227 2.40004 15.7919 2.51402 16.3199 2.78303C17.169 3.21569 17.8594 3.90607 18.2921 4.75522C18.5651 5.29099 18.6784 5.86927 18.732 6.52496C18.784 7.16129 18.784 7.94668 18.784 8.91849V14.1255C18.784 15.0973 18.784 15.8827 18.732 16.5191C18.6784 17.1747 18.5651 17.753 18.2921 18.2888C17.8594 19.1379 17.169 19.8283 16.3199 20.261C15.7841 20.534 15.2058 20.6473 14.5502 20.7009C13.9138 20.7529 13.1284 20.7529 12.1566 20.7528H6.94959C5.97779 20.7529 5.1924 20.7529 4.55606 20.7009C3.90038 20.6473 3.32209 20.534 2.78633 20.261C1.93718 19.8283 1.2468 19.1379 0.814139 18.2888C0.541153 17.753 0.427812 17.1747 0.37424 16.519C0.322249 15.8827 0.322257 15.0973 0.322266 14.1255V8.91849C0.322257 7.94669 0.322249 7.16129 0.37424 6.52495C0.427812 5.86927 0.541153 5.29099 0.814139 4.75522C1.2468 3.90607 1.93718 3.21569 2.78633 2.78303C3.31428 2.51403 3.88351 2.40005 4.5274 2.34552V1.67577C4.5274 1.16596 4.94068 0.752686 5.45049 0.752686ZM4.5274 4.20007C4.0945 4.24696 3.82972 4.3234 3.62447 4.42798C3.1227 4.68364 2.71475 5.0916 2.45909 5.59337C2.34081 5.8255 2.25852 6.13378 2.21428 6.67529C2.17713 7.12997 2.17008 7.69142 2.16874 8.44505H16.9375C16.9361 7.69142 16.9291 7.12997 16.8919 6.67529C16.8477 6.13378 16.7654 5.82549 16.6471 5.59337C16.3915 5.0916 15.9835 4.68364 15.4817 4.42798C15.2765 4.3234 15.0117 4.24695 14.5788 4.20006V4.95785C14.5788 5.46765 14.1655 5.88093 13.6557 5.88093C13.1459 5.88093 12.7326 5.46765 12.7326 4.95785V4.13786C12.5408 4.13736 12.3361 4.13733 12.1172 4.13733H6.98899C6.77006 4.13733 6.56542 4.13736 6.37357 4.13786V4.95785C6.37357 5.46765 5.96029 5.88093 5.45049 5.88093C4.94068 5.88093 4.5274 5.46765 4.5274 4.95785V4.20007ZM16.9378 10.2912H2.16844V14.0861C2.16844 15.1066 2.16915 15.8164 2.21428 16.3687C2.25852 16.9102 2.34081 17.2185 2.45909 17.4506C2.71475 17.9524 3.1227 18.3604 3.62447 18.616C3.8566 18.7343 4.16488 18.8166 4.7064 18.8608C5.25869 18.906 5.96852 18.9067 6.98898 18.9067H12.1172C13.1377 18.9067 13.8475 18.906 14.3998 18.8608C14.9413 18.8166 15.2496 18.7343 15.4817 18.616C15.9835 18.3604 16.3915 17.9524 16.6471 17.4506C16.7654 17.2185 16.8477 16.9102 16.8919 16.3687C16.9371 15.8164 16.9378 15.1066 16.9378 14.0861V10.2912Z" fill="white" />
+                </svg>
+                <div class="event__card-date-value">21.04–21.07</div>
+              </div>
+              <p class="event__card-subtitle">Первый сезон</p>
+              <h3 class="event__card-title">Bounty pass #1: Progress</h3>
+              <p class="event__card-description">
+                В&nbsp;этот период для всех багхантеров будет доступен прогресс-бар с&nbsp;событиями от&nbsp;VK. Каждое новое событие&nbsp;&mdash; это акция с&nbsp;бонусом, который увеличивает сумму вознаграждения.
+              </p>
+              <a href="/bountypass1" class="event__card-status">Unlocked</a>
+            </div>
+            <div class="event__card">
+              <div class="event__card-date">
+                <svg class="event__card-date-icon" xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                  <path d="M14.6813 15.1118C14.6813 15.9614 13.9925 16.6502 13.1429 16.6502C12.2932 16.6502 11.6044 15.9614 11.6044 15.1118C11.6044 14.2621 12.2932 13.5733 13.1429 13.5733C13.9925 13.5733 14.6813 14.2621 14.6813 15.1118Z" fill="white" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45049 0.752686C5.96029 0.752686 6.37357 1.16596 6.37357 1.67577V2.29161C6.55792 2.29116 6.74982 2.29116 6.9496 2.29116H12.1566C12.3564 2.29116 12.5483 2.29116 12.7326 2.29161V1.67577C12.7326 1.16596 13.1459 0.752686 13.6557 0.752686C14.1655 0.752686 14.5788 1.16596 14.5788 1.67577V2.34551C15.2227 2.40004 15.7919 2.51402 16.3199 2.78303C17.169 3.21569 17.8594 3.90607 18.2921 4.75522C18.5651 5.29099 18.6784 5.86927 18.732 6.52496C18.784 7.16129 18.784 7.94668 18.784 8.91849V14.1255C18.784 15.0973 18.784 15.8827 18.732 16.5191C18.6784 17.1747 18.5651 17.753 18.2921 18.2888C17.8594 19.1379 17.169 19.8283 16.3199 20.261C15.7841 20.534 15.2058 20.6473 14.5502 20.7009C13.9138 20.7529 13.1284 20.7529 12.1566 20.7528H6.94959C5.97779 20.7529 5.1924 20.7529 4.55606 20.7009C3.90038 20.6473 3.32209 20.534 2.78633 20.261C1.93718 19.8283 1.2468 19.1379 0.814139 18.2888C0.541153 17.753 0.427812 17.1747 0.37424 16.519C0.322249 15.8827 0.322257 15.0973 0.322266 14.1255V8.91849C0.322257 7.94669 0.322249 7.16129 0.37424 6.52495C0.427812 5.86927 0.541153 5.29099 0.814139 4.75522C1.2468 3.90607 1.93718 3.21569 2.78633 2.78303C3.31428 2.51403 3.88351 2.40005 4.5274 2.34552V1.67577C4.5274 1.16596 4.94068 0.752686 5.45049 0.752686ZM4.5274 4.20007C4.0945 4.24696 3.82972 4.3234 3.62447 4.42798C3.1227 4.68364 2.71475 5.0916 2.45909 5.59337C2.34081 5.8255 2.25852 6.13378 2.21428 6.67529C2.17713 7.12997 2.17008 7.69142 2.16874 8.44505H16.9375C16.9361 7.69142 16.9291 7.12997 16.8919 6.67529C16.8477 6.13378 16.7654 5.82549 16.6471 5.59337C16.3915 5.0916 15.9835 4.68364 15.4817 4.42798C15.2765 4.3234 15.0117 4.24695 14.5788 4.20006V4.95785C14.5788 5.46765 14.1655 5.88093 13.6557 5.88093C13.1459 5.88093 12.7326 5.46765 12.7326 4.95785V4.13786C12.5408 4.13736 12.3361 4.13733 12.1172 4.13733H6.98899C6.77006 4.13733 6.56542 4.13736 6.37357 4.13786V4.95785C6.37357 5.46765 5.96029 5.88093 5.45049 5.88093C4.94068 5.88093 4.5274 5.46765 4.5274 4.95785V4.20007ZM16.9378 10.2912H2.16844V14.0861C2.16844 15.1066 2.16915 15.8164 2.21428 16.3687C2.25852 16.9102 2.34081 17.2185 2.45909 17.4506C2.71475 17.9524 3.1227 18.3604 3.62447 18.616C3.8566 18.7343 4.16488 18.8166 4.7064 18.8608C5.25869 18.906 5.96852 18.9067 6.98898 18.9067H12.1172C13.1377 18.9067 13.8475 18.906 14.3998 18.8608C14.9413 18.8166 15.2496 18.7343 15.4817 18.616C15.9835 18.3604 16.3915 17.9524 16.6471 17.4506C16.7654 17.2185 16.8477 16.9102 16.8919 16.3687C16.9371 15.8164 16.9378 15.1066 16.9378 14.0861V10.2912Z" fill="white" />
+                </svg>
+                <div class="event__card-date-value">22.07–21.10</div>
+              </div>
+              <p class="event__card-subtitle">второй сезон</p>
+              <h3 class="event__card-title">Bounty pass #2: Olymp</h3>
+              <p class="event__card-description">
+                Выкладываемся на&nbsp;все сто!<br>
+                Больше валидных и&nbsp;оплачиваемых репортов&nbsp;&mdash; больше шансов забрать олимпийские награды.
+              </p>
+              <p class="event__card-status event__card-status--locked">Locked</p>
+            </div>
+            <div class="event__card">
+              <div class="event__card-date">
+                <svg class="event__card-date-icon" xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                  <path d="M14.6813 15.1118C14.6813 15.9614 13.9925 16.6502 13.1429 16.6502C12.2932 16.6502 11.6044 15.9614 11.6044 15.1118C11.6044 14.2621 12.2932 13.5733 13.1429 13.5733C13.9925 13.5733 14.6813 14.2621 14.6813 15.1118Z" fill="white" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45049 0.752686C5.96029 0.752686 6.37357 1.16596 6.37357 1.67577V2.29161C6.55792 2.29116 6.74982 2.29116 6.9496 2.29116H12.1566C12.3564 2.29116 12.5483 2.29116 12.7326 2.29161V1.67577C12.7326 1.16596 13.1459 0.752686 13.6557 0.752686C14.1655 0.752686 14.5788 1.16596 14.5788 1.67577V2.34551C15.2227 2.40004 15.7919 2.51402 16.3199 2.78303C17.169 3.21569 17.8594 3.90607 18.2921 4.75522C18.5651 5.29099 18.6784 5.86927 18.732 6.52496C18.784 7.16129 18.784 7.94668 18.784 8.91849V14.1255C18.784 15.0973 18.784 15.8827 18.732 16.5191C18.6784 17.1747 18.5651 17.753 18.2921 18.2888C17.8594 19.1379 17.169 19.8283 16.3199 20.261C15.7841 20.534 15.2058 20.6473 14.5502 20.7009C13.9138 20.7529 13.1284 20.7529 12.1566 20.7528H6.94959C5.97779 20.7529 5.1924 20.7529 4.55606 20.7009C3.90038 20.6473 3.32209 20.534 2.78633 20.261C1.93718 19.8283 1.2468 19.1379 0.814139 18.2888C0.541153 17.753 0.427812 17.1747 0.37424 16.519C0.322249 15.8827 0.322257 15.0973 0.322266 14.1255V8.91849C0.322257 7.94669 0.322249 7.16129 0.37424 6.52495C0.427812 5.86927 0.541153 5.29099 0.814139 4.75522C1.2468 3.90607 1.93718 3.21569 2.78633 2.78303C3.31428 2.51403 3.88351 2.40005 4.5274 2.34552V1.67577C4.5274 1.16596 4.94068 0.752686 5.45049 0.752686ZM4.5274 4.20007C4.0945 4.24696 3.82972 4.3234 3.62447 4.42798C3.1227 4.68364 2.71475 5.0916 2.45909 5.59337C2.34081 5.8255 2.25852 6.13378 2.21428 6.67529C2.17713 7.12997 2.17008 7.69142 2.16874 8.44505H16.9375C16.9361 7.69142 16.9291 7.12997 16.8919 6.67529C16.8477 6.13378 16.7654 5.82549 16.6471 5.59337C16.3915 5.0916 15.9835 4.68364 15.4817 4.42798C15.2765 4.3234 15.0117 4.24695 14.5788 4.20006V4.95785C14.5788 5.46765 14.1655 5.88093 13.6557 5.88093C13.1459 5.88093 12.7326 5.46765 12.7326 4.95785V4.13786C12.5408 4.13736 12.3361 4.13733 12.1172 4.13733H6.98899C6.77006 4.13733 6.56542 4.13736 6.37357 4.13786V4.95785C6.37357 5.46765 5.96029 5.88093 5.45049 5.88093C4.94068 5.88093 4.5274 5.46765 4.5274 4.95785V4.20007ZM16.9378 10.2912H2.16844V14.0861C2.16844 15.1066 2.16915 15.8164 2.21428 16.3687C2.25852 16.9102 2.34081 17.2185 2.45909 17.4506C2.71475 17.9524 3.1227 18.3604 3.62447 18.616C3.8566 18.7343 4.16488 18.8166 4.7064 18.8608C5.25869 18.906 5.96852 18.9067 6.98898 18.9067H12.1172C13.1377 18.9067 13.8475 18.906 14.3998 18.8608C14.9413 18.8166 15.2496 18.7343 15.4817 18.616C15.9835 18.3604 16.3915 17.9524 16.6471 17.4506C16.7654 17.2185 16.8477 16.9102 16.8919 16.3687C16.9371 15.8164 16.9378 15.1066 16.9378 14.0861V10.2912Z" fill="white" />
+                </svg>
+                <div class="event__card-date-value">22.10–21.12</div>
+              </div>
+              <p class="event__card-subtitle">третий сезон</p>
+              <h3 class="event__card-title">Bounty pass #3: Advent</h3>
+              <p class="event__card-description">
+                Разыгрываем дополнительные денежные бонусы, уникальный мерч и&nbsp;приватный доступ к&nbsp;закрытым багбаунти-программам.
+              </p>
+              <p class="event__card-status event__card-status--locked">Locked</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="programms">
+        <div class="container">
+          <h2 class="programms__title">Программы</h2>
+          <p class="programms__description">От&nbsp;почты Mail.ru&nbsp;&mdash; к&nbsp;30+&nbsp;проектам VK&nbsp;Bug Bounty!</p>
+          <div class="programms__navigation">
+            <button class="programms__navigation-btn programms__navigation-btn--prev">
+              <svg xmlns="http://www.w3.org/2000/svg" width="59" height="59" viewBox="0 0 59 59" fill="none">
+                <path d="M32.5 39.4802L22.6515 29.253L32.5 19.0257" stroke="#0077FF" stroke-width="2.4" stroke-linecap="square" />
+              </svg>
+            </button>
+            <button class="programms__navigation-btn programms__navigation-btn--next">
+              <svg xmlns="http://www.w3.org/2000/svg" width="59" height="59" viewBox="0 0 59 59" fill="none">
+                <path d="M32.5 39.4802L22.6515 29.253L32.5 19.0257" stroke="#0077FF" stroke-width="2.4" stroke-linecap="square" />
+              </svg>
+            </button>
+          </div>
+          <div class="programms__slider swiper">
+            <div class="swiper-wrapper">
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-1.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">ВКонтакте</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-2.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Дзен</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-3.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Одноклассники</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-10.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK WorkSpace</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-11.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Tarantool</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-12.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Teams</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-19.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Play</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-20.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">GeekBrains</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-21.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Skillfactory</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-28.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Тетрика</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-29.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Customer Experiens Hub</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-4.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Облако Mail.ru</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-5.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Календарь Mail.ru</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-6.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Почта Mail.ru</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-13.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Капсула</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-14.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Реклама</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-15.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Портал</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-22.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Skillbox</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-23.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Учи.ру</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-24.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK People Hub</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-31.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">ТАРМ</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-32.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Оператор рекламных данных</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-7.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">RuStore</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-8.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Cloud</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-9.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK Pay</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-16.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Мой Мир</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-17.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">VK HR Tek</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-18.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Юла</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-25.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Чемпионаты VK</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-26.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">ESforce</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-27.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Академика</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-30.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Plazius</div>
+              </div>
+              <div class="programms__slide swiper-slide">
+                <img src="img/content/icon-33.png" alt="" class="programms__slide-icon" height="65">
+                <div class="programms__slide-name">Relap</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="platforms">
+        <div class="container">
+          <h2 class="platforms__title">Платформы</h2>
+          <p class="platforms__description">Выбирайте платформу, присоединяйтесь к&nbsp;программе и&nbsp;получайте вознаграждение</p>
+          <div class="platforms__cards">
+            <div class="platforms__card">
+              <img src="img/content/platform-1.png" alt="" class="platforms__card-icon" width="65" height="65px">
+              <div class="platforms__card-name">Standoff Bug Bounty</div>
+              <a href="https://bugbounty.standoff365.com/vendors/vk/" class="platforms__card-link" target="_blank">Перейти</a>
+            </div>
+            <div class="platforms__card">
+              <img src="img/content/platform-2.png" alt="" class="platforms__card-icon" width="65" height="65px">
+              <div class="platforms__card-name">BI.ZONE Bug Bounty</div>
+              <a href="https://app.bugbounty.bi.zone/companies/group/vk" class="platforms__card-link" target="_blank">Перейти</a>
+            </div>
+            <div class="platforms__card">
+              <img src="img/content/platform-3.png" alt="" class="platforms__card-icon" width="65" height="65px">
+              <div class="platforms__card-name">Bugbounty.ru</div>
+              <a href="https://bugbounty.ru/app/programs/vk" class="platforms__card-link" target="_blank">Перейти</a>
+            </div>
+          </div>
+          <div class="platforms__info">
+            VK&nbsp;&mdash; первая из&nbsp;компаний, <span>представленных на&nbsp;всех российских платформах Bug Bounty</span>
+          </div>
+        </div>
+      </section>
+      <div class="line line--without-border-bottom">
+        <div class="line__wrapper">
+          <div class="line__content marquee-container">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+          <div class="line__content">
+            <img src="img/content/bi.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+            <img src="img/content/by.png" alt="" class="line__icon" width="40" height="40">
+            <div class="line__content-text">VK Bug Bounty 10 years unlocked</div>
+          </div>
+        </div>
+      </div>
+      <section class="party">
+        <img src="img/content/party.png" alt="" class="party__illustration" width="480" height="530">
+        <div class="container">
+          <h2 class="party__title">VK&nbsp;Bug Bounty: 10&nbsp;years&nbsp;unlocked</h2>
+          <p class="party__description">
+            Приглашаем отметить десятилетие программы вместе&nbsp;с&nbsp;нами!<br><br>
+            Присоединяйтесь, если хотите стать частью закрытой тусовки и&nbsp;узнать о&nbsp;планах VK&nbsp;Bug&nbsp;Bounty.
+          </p>
+          <div class="party__cards">
+            <div class="party__card">
+              <h3 class="party__card-title">Что будет на&nbsp;мероприятии</h3>
+              <div class="party__card-content">
+                <ul>
+                  <li>Вы&nbsp;узнаете о&nbsp;планах на&nbsp;2024 год</li>
+                  <li>Услышите историю возникновения Bug&nbsp;Bounty в&nbsp;компании</li>
+                  <li>Узнаете истории о&nbsp;нетривиально найденных уязвимостях</li>
+                  <li>Сможете обменяться опытом и&nbsp;расширить круг полезных знакомств</li>
+                  <li>Получите классный мерч и&nbsp;отлично проведёте время на&nbsp;афтепати</li>
+                </ul>
+              </div>
+            </div>
+            <div class="party__card">
+              <h3 class="party__card-title">Как попасть на&nbsp;вечеринку?</h3>
+              <div class="party__card-content">
+                Прислать четыре оплачиваемых отчёта в&nbsp;период с&nbsp;12&nbsp;февраля по&nbsp;11&nbsp;апреля.<br><br>
+                Мы&nbsp;вас ждём!
+              </div>
+              <a href="/bbparty" class="party__card-link">Узнать подробнее</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer footer--dark">
+      <div class="container">
+        <div class="footer__top">
+          <h2 class="footer__title">Удачной охоты за&nbsp;багами&nbsp;&mdash; и&nbsp;до&nbsp;встречи!</h2>
+          <img src="img/content/logo-white.svg" alt="" class="footer__logo" width="50" height="50">
+        </div>
+        <div class="footer__copyright">Команда VK © 2024</div>
+      </div>
+    </footer>
+  </div>
+  <script src="js/vendor.min.js"></script>
+  <script src="js/main.min.js"></script>
+</body>
+
+</html>

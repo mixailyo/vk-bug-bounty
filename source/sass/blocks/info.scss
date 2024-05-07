@@ -1,0 +1,12 @@
+.info {
+  @include adaptiveDesktopToMobile('padding-bottom', 150, 75);
+  @include adaptiveDesktopToMobile('padding-top', 150, 75);
+  background: #07F;
+}
+.info__title {
+  @include adaptiveDesktopToMobile('font-size', 62, 30);
+  font-weight: 500;
+  line-height: 125%;
+  margin: 0;
+  color: #FFF;
+}

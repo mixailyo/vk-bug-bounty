@@ -1,21 +1,44 @@
-// @font-face {
-//   font-style: normal;
-//   font-weight: 400;
-//   font-family: "Rouble";
-
-//   font-display: swap;
-//   src:
-//     url("../fonts/rouble.woff2") format("woff2"),
-//     url("../fonts/rouble.woff") format("woff");
-// }
+@font-face {
+  font-family: "VK Sans Display";
+  src: url("../fonts/VK-Sans-Display.woff2") format("woff2"),
+    url("../fonts/VK-Sans-Display.woff") format("woff");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-  font-style: normal;
-  font-weight: 400;
-  font-family: "";
-
+  font-family: "VK Sans Display";
+  src: url("../fonts/VK-Sans-Display-Medium.woff2") format("woff2"),
+    url("../fonts/VK-Sans-Display-Medium.woff") format("woff");
   font-display: swap;
-  src:
-    url("../fonts/.woff2") format("woff2"),
-    url("../fonts/.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VK Sans Display";
+  src: url("../fonts/VK-Sans-Display-Demibold.woff2") format("woff2"),
+    url("../fonts/VK-Sans-Display-Demibold.woff") format("woff");
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VK Sans Text";
+  src: url("../fonts/VK-Sans-Text.woff2") format("woff2"),
+    url("../fonts/VK-Sans-Text.woff") format("woff");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SignPainter";
+  src: url("../fonts/signpainter_housescript.woff2") format("woff2"),
+    url("../fonts/signpainter_housescript.woff") format("woff");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
 }

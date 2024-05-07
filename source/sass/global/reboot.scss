@@ -14,8 +14,8 @@ body {
 html {
   font-style: normal;
   font-weight: 400;
-  font-size: $fz-default;
-  line-height: 24px;
+  @include adaptiveDesktopToMobile('font-size', 24, 16);
+  line-height: 1.3;
   font-family: $ff-placeholder;
   color: $color-default-black;
 
